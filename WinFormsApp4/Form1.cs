@@ -46,7 +46,7 @@ namespace WinFormsApp4
                     }
                 } catch 
                 {
-                    MessageBox.Show("Невозможно прочитать данные из файла", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("РќРµРІРѕР·РјРѕР¶РЅРѕ РїСЂРѕС‡РёС‚Р°С‚СЊ РґР°РЅРЅС‹Рµ РёР· С„Р°Р№Р»Р°", "РћС€РёР±РєР°", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -74,7 +74,7 @@ namespace WinFormsApp4
                 }
                 catch 
                 {
-                    MessageBox.Show("Невозможно сохранить данные в файл", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                    MessageBox.Show("РќРµРІРѕР·РјРѕР¶РЅРѕ СЃРѕС…СЂР°РЅРёС‚СЊ РґР°РЅРЅС‹Рµ РІ С„Р°Р№Р»", "РћС€РёР±РєР°", MessageBoxButtons.OK, MessageBoxIcon.Error); 
                 }
                 
             }
