@@ -30,6 +30,7 @@ namespace WinFormsApp4
             {
                 try
                 {
+                    //Получаем данные из выделенной строчки и раскидываем их по текстбоксам, для того чтобы пользователь видел данные и мог их изменить.
                     var r = f1.dataGridView1.SelectedRows[0].Cells;
                     dateTimePicker1.Value = DateTime.Parse(r[0].Value.ToString());
                     textBox1.Text = r[1].Value.ToString();
@@ -61,6 +62,7 @@ namespace WinFormsApp4
 
         private void button1_Click(object sender, EventArgs e)
         {
+            // Обработка нежелательных ситуаций с пустыми полями.
             string errorstr = "";
             if (textBox1.Text.Length <= 10)
                 errorstr = "Поле ФИО не должно иметь длину менее 10 символов";
@@ -78,7 +80,7 @@ namespace WinFormsApp4
             if (ins)
                 f1.dataGridView1.Rows.Remove(f1.dataGridView1.SelectedRows[0]);
             f1.dataGridView1.Rows.Add(dateTimePicker1.Value.ToShortDateString(), textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text);
-            this.Close();
+            Close();
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e) => f1.Enabled = true;

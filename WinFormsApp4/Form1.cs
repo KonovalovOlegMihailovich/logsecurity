@@ -4,6 +4,7 @@ namespace WinFormsApp4
     {
         public Form1() => InitializeComponent();
 
+        //Настраиваем DataGridView
         private void Form1_Load(object sender, EventArgs e)
         {
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -20,6 +21,7 @@ namespace WinFormsApp4
 
         private void button3_Click(object sender, EventArgs e)
         {
+            // Удаляем из DataGridView выделенные строки
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
                 dataGridView1.Rows.Remove(row);
@@ -28,12 +30,15 @@ namespace WinFormsApp4
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //Отчищаем строки, перед добавлением новых
             dataGridView1.Rows.Clear();
+            //Открываем диалог выбора файла
             OpenFileDialog fbd = new OpenFileDialog();
             if (fbd.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
+                    //Читаем файл построчно и добавляем в DataGridView строки
                     using (StreamReader sr = File.OpenText(fbd.FileName))
                     {
                         while (!sr.EndOfStream)
@@ -46,6 +51,7 @@ namespace WinFormsApp4
                     }
                 } catch 
                 {
+                    //Выдаём сообщение о ошибке
                     MessageBox.Show("Невозможно прочитать данные из файла", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -53,12 +59,14 @@ namespace WinFormsApp4
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //Открываем диалог  выбора/создания файла
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             DialogResult r = folderBrowserDialog.ShowDialog();
             if (r == DialogResult.OK)
             {
                 try
                 {
+                    //Записываем в файл строки из DataGridView, в качестве разделителя ячеек используется символ #
                     using (StreamWriter sw = File.CreateText(folderBrowserDialog.SelectedPath + @"\data"))
                     {
                         foreach (DataGridViewRow row in dataGridView1.Rows)
@@ -74,12 +82,13 @@ namespace WinFormsApp4
                 }
                 catch 
                 {
+                    //Выдаём сообщение об ошибке
                     MessageBox.Show("Невозможно сохранить данные в файл", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); 
                 }
                 
             }
         }
-
+        // Если нет строк в таблице, то кнопка изменения отключается, во избежания сегфолта.
         private void dataGridView1_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
             button2.Enabled = !(e.RowIndex == 0);
